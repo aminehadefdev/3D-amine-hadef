@@ -11,6 +11,7 @@ import { clickAvatar } from './avatar/clickAvatar';
 
 import { displaydialog } from './avatar/displaydialog';
 import { displayTextOnDialog } from './avatar/displayTextOnDialog';
+import "../dist/objs/animations"
 
 // --- Variables globales ---
 let avatar, mixer, room;
@@ -30,12 +31,12 @@ Light(scene)
 
 // --- Charger l'avatar ---
 const avatarAnimations = [
-  '../public/objs/animations/stay.glb',
-  '../public/objs/animations/talkin001.glb',
-  '../public/objs/animations/salsa.glb',
-  '../public/objs/animations/waving.glb'
+  '../dist/objs/animations/stay.glb',
+  '../dist/objs/animations/talkin001.glb',
+  '../dist/objs/animations/salsa.glb',
+  '../dist/objs/animations/waving.glb'
 ]
-loadAvatar(scene, '../public/objs/avatar/rpm.glb', avatarAnimations).then((data) => {
+loadAvatar(scene, '../dist/objs/avatar/rpm.glb', avatarAnimations).then((data) => {
   avatar = data.avatar;
   mixer = data.mixer;
   displaydialog(() => {
@@ -45,7 +46,7 @@ loadAvatar(scene, '../public/objs/avatar/rpm.glb', avatarAnimations).then((data)
 });
 
 // --- Charger la room ---
-loadRoom(scene, '../public/objs/room/room3.glb').then((data) => {
+loadRoom(scene, '../dist/objs/avatar/room3.glb').then((data) => {
   room = data.room;
 });
 
