@@ -31,12 +31,12 @@ Light(scene)
 
 // --- Charger l'avatar ---
 const avatarAnimations = [
-  '../dist/objs/animations/stay.glb',
-  '../dist/objs/animations/talkin001.glb',
-  '../dist/objs/animations/salsa.glb',
-  '../dist/objs/animations/waving.glb'
+  '/objs/animations/stay.glb',
+  '/objs/animations/talkin001.glb',
+  '/objs/animations/salsa.glb',
+  '/objs/animations/waving.glb'
 ]
-loadAvatar(scene, '../dist/objs/avatar/rpm.glb', avatarAnimations).then((data) => {
+loadAvatar(scene, '/objs/avatar/rpm.glb', avatarAnimations).then((data) => {
   avatar = data.avatar;
   mixer = data.mixer;
   displaydialog(() => {
@@ -46,7 +46,7 @@ loadAvatar(scene, '../dist/objs/avatar/rpm.glb', avatarAnimations).then((data) =
 });
 
 // --- Charger la room ---
-loadRoom(scene, '../dist/objs/avatar/room3.glb').then((data) => {
+loadRoom(scene, '/objs/avatar/room3.glb').then((data) => {
   room = data.room;
 });
 
