@@ -11,7 +11,6 @@ import { clickAvatar } from './avatar/clickAvatar';
 
 import { displaydialog } from './avatar/displaydialog';
 import { displayTextOnDialog } from './avatar/displayTextOnDialog';
-import "../dist/objs/animations"
 
 // --- Variables globales ---
 let avatar, mixer, room;
@@ -34,7 +33,7 @@ const avatarAnimations = [
   '/objs/animations/stay.glb',
   '/objs/animations/talkin001.glb',
   '/objs/animations/salsa.glb',
-  '/objs/animations/waving.glb'
+  '/objs/animations/Waving.glb'
 ]
 loadAvatar(scene, '/objs/avatar/rpm.glb', avatarAnimations).then((data) => {
   avatar = data.avatar;
@@ -46,7 +45,7 @@ loadAvatar(scene, '/objs/avatar/rpm.glb', avatarAnimations).then((data) => {
 });
 
 // --- Charger la room ---
-loadRoom(scene, '/objs/avatar/room3.glb').then((data) => {
+loadRoom(scene, '/objs/room/room3.glb').then((data) => {
   room = data.room;
 });
 
