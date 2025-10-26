@@ -1,9 +1,9 @@
 import { Clock } from 'three';
-import Scene from './scene';
-import Camera from './camera';
+import Scene from './Scene';
+import Camera from './Camera';
 import Renderer from './Renderer';
 import Controls from './Controls'
-import Light from './light';
+import Light from './Light';
 
 import { loadAvatar } from "./avatar/loadAvatar";
 import { loadRoom } from './room/loadRoom';
@@ -11,9 +11,6 @@ import { clickAvatar } from './avatar/clickAvatar';
 
 import { displaydialog } from './avatar/displaydialog';
 import { displayTextOnDialog } from './avatar/displayTextOnDialog';
-import { stay } from './avatar/animations/stay';
-import { waving } from './avatar/animations/waving';
-
 
 // --- Variables globales ---
 let avatar, mixer, room;
