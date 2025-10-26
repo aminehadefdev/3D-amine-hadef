@@ -352,5 +352,6 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
         }
     }
     window.addEventListener('click', onClick);
+    window.addEventListener('touchstart', onClick);
 }
 
