@@ -322,6 +322,35 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
         }
 
     ]
+
+    const onTouch = (event) => {
+        event.preventDefault(); // empêche le scroll ou d'autres actions du navigateur
+        const touch = event.touches[0]; // on prend le premier doigt
+        mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObject(avatar, true);
+        if (intersects.length > 0) {
+            focusAvatar(avatar, camera, controls, renderer, scene, () => {
+                if (counter === 0) {
+                    counter++
+                    displaydialog(() => {
+                        const text = "salut je m'appelle amine. Je suis ici pour repondre a vos questions utilisez les buttons pour me poser des questions ou me faire faire des actions"
+                        talk(avatar, mixer)
+                        displayTextOnDialog(text, () => {
+                            stay(avatar, mixer)
+                            displayPopUpQuestions(() => {
+                                displayBtnsQuestions(questions, () => {
+                                    addEventbtnsQuestions(questions)
+                                })
+                            })
+                        })
+                    })
+                }
+            })
+        }
+    }
     // --- Clic sur avatar --
     const onClick = (event) => {
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -352,6 +381,6 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
         }
     }
     window.addEventListener('click', onClick);
-    window.addEventListener('touchstart', onClick);
+    window.addEventListener('touchstart', onTouch);
 }
 
