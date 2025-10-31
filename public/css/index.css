@@ -1,3 +1,6 @@
+body{
+    cursor: pointer;
+}
 .popup {
     display: none;
     position: absolute;
