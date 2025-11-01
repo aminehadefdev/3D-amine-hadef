@@ -43,6 +43,16 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             }
         },
         {
+            'question': 'Tu habite ou?',
+            'id': "btn-question-" + uuidv4(),
+            'actions': () => {
+                talk(avatar, mixer)
+                displayTextOnDialog("j'habite a Clamart dans le 92.", () => {
+                    stay(avatar, mixer)
+                })
+            }
+        },
+        {
             "question": "Tu viens d’où ?",
             "id": "btn-question-" + uuidv4(),
             "actions": () => {
@@ -57,7 +67,17 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             "id": "btn-question-" + uuidv4(),
             "actions": () => {
                 talk(avatar, mixer)
-                displayTextOnDialog("Parce que j’adore comprendre comment tout marche ! Et aussi parce que faire planter un programme et réussir à le réparer, c’est un peu comme vaincre un boss de jeu vidéo 💪🎮.", () => {
+                displayTextOnDialog("Parce que j’adore apprendre et comprendre comment tout marche ! Et aussi parce que faire planter un programme et réussir à le réparer, c’est un peu comme vaincre un boss de jeu vidéo 💪🎮. le developpement m'offre un vrais defi il y a toujour quelque chose a apprende ou a revoir", () => {
+                    stay(avatar, mixer)
+                })
+            }
+        },
+        {
+            "question": "Tu as des préférences sur le secteur de ta future entreprise ?",
+            "id": "btn-question-" + uuidv4(),
+            "actions": () => {
+                talk(avatar, mixer)
+                displayTextOnDialog("Peu importe le secteur 🚀, tant que l’entreprise a de l'éthique et respecte ses équipes 🙌💡.", () => {
                     stay(avatar, mixer)
                 })
             }
@@ -83,16 +103,16 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                 })
             }
         },
-        {
-            "question": "Tu fais aussi du design ?",
-            "id": "btn-question-" + uuidv4(),
-            "actions": () => {
-                talk(avatar, mixer)
-                displayTextOnDialog("Disons que j’aime que ce soit joli 😁. J’aime soigner l’expérience utilisateur, même si je laisse les vrais artistes du design faire les miracles 🎨.", () => {
-                    stay(avatar, mixer)
-                })
-            }
-        },
+        // {
+        //     "question": "Tu fais aussi du design ?",
+        //     "id": "btn-question-" + uuidv4(),
+        //     "actions": () => {
+        //         talk(avatar, mixer)
+        //         displayTextOnDialog("Disons que j’aime que ce soit joli 😁. J’aime soigner l’expérience utilisateur, même si je laisse les vrais artistes du design faire les miracles 🎨.", () => {
+        //             stay(avatar, mixer)
+        //         })
+        //     }
+        // },
         {
             "question": "C’est quoi ton super-pouvoir de développeur ?",
             "id": "btn-question-" + uuidv4(),
@@ -148,7 +168,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             "id": "btn-question-" + uuidv4(),
             "actions": () => {
                 talk(avatar, mixer)
-                displayTextOnDialog("Les deux ! Seul, je trace comme un ninja 🥷. En équipe, j’apprends, je partage, et je rigole (parfois trop 😄).", () => {
+                displayTextOnDialog("Les deux! Seul, je trace comme un ninja 🥷. En équipe, j’apprends, je partage, et je rigole (parfois trop 😄).", () => {
                     stay(avatar, mixer)
                 })
             }
