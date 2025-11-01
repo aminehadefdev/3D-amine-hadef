@@ -35,13 +35,14 @@ const avatarAnimations = [
   '/objs/animations/salsa.glb',
   '/objs/animations/Waving.glb'
 ]
-loadAvatar(scene, '/objs/avatar/rpm.glb', avatarAnimations).then((data) => {
+loadAvatar(scene, '/objs/avatar/avatar.glb', avatarAnimations).then((data) => {
   avatar = data.avatar;
   mixer = data.mixer;
   displaydialog(() => {
-    displayTextOnDialog("Clickez sur l'avatar pour avoir un dialog.", () => {})
+    displayTextOnDialog("Clickez sur l'avatar pour avoir un dialog.", () => { })
   })
   clickAvatar(avatar, camera, controls, renderer, scene, mixer);
+  
 });
 
 // --- Charger la room ---
