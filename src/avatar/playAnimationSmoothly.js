@@ -17,7 +17,7 @@ export function playAnimationSmoothly(avatar, mixer, targetClip, fadeDuration = 
         nextAction.clampWhenFinished = false;
     } else {
         nextAction.setLoop(LoopOnce, 0);
-        nextAction.clampWhenFinished = false; // on préfère false et gérer l'enchaînement
+        nextAction.clampWhenFinished = true; // on préfère false et gérer l'enchaînement
     }
 
     // Démarrer la nouvelle action (prépare pour le fade)

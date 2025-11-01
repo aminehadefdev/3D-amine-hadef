@@ -50,7 +50,9 @@ export function loadAvatar(scene, file, paths) {
           avatar.userData.wavingClip = wavingClip;
 
           if (stayClip && wavingClip) {
-            waving(avatar, mixer, ()=>{stay(avatar, mixer)})
+            waving(avatar, mixer, () => {
+              stay(avatar, mixer)
+            })
           }
 
           resolve({ avatar, mixer });
