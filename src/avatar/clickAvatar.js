@@ -290,7 +290,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                         talk(avatar, mixer)
                         displayTextOnDialog(text, () => {
                             stay(avatar, mixer)
-                            displayPopUpQuestions(() => {
+                            displayPopUpQuestions('right',() => {
                                 displayBtnsQuestions(questions, () => {
                                     addEventbtnsQuestions(questions)
                                 })
