@@ -304,14 +304,9 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
     // --- Clic sur avatar --
     const onClick = (event) => {
         event.preventDefault()
-
-        if(event.touches[0]){
-            mouse.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-            mouse.y = (event.touches[0].clientY / window.innerWidth) * 2 - 1;
-        }else{
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        }
+        
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
         raycaster.setFromCamera(mouse, camera);
         if (!avatar) return;
