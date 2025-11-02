@@ -17,7 +17,7 @@ import { getAgeFromDate } from './getAgeFromDate';
 export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
     const talkAndStay = (text) => {
         talk(avatar, mixer)
-        displayTextOnDialog(text, ()=>{stay(avatar, mixer)})
+        displayTextOnDialog(text, () => { stay(avatar, mixer) })
     }
     // --- Raycaster pour le clic ---
     const raycaster = new THREE.Raycaster();
@@ -304,13 +304,14 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
     // --- Clic sur avatar --
     const onClick = (event) => {
         event.preventDefault()
-
-        if(event.type === 'touchstart'){
-            mouse.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-            mouse.y = (event.touches[0].clientY / window.innerWidth) * 2 - 1;
-        }else{
+        
+        if (event.type === 'click') {
             mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        } else {
+            mouse.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+            mouse.y = (event.touches[0].clientY / window.innerWidth) * 2 - 1;
+
         }
 
         raycaster.setFromCamera(mouse, camera);
