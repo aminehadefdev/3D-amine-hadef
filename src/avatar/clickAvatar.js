@@ -305,7 +305,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
     const onClick = (event) => {
         event.preventDefault()
 
-        if(event.touches){
+        if(event.type === 'touchstart'){
             mouse.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
             mouse.y = (event.touches[0].clientY / window.innerWidth) * 2 - 1;
         }else{
@@ -315,7 +315,6 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
 
         raycaster.setFromCamera(mouse, camera);
         if (!avatar) return;
-
         const intersects = raycaster.intersectObject(avatar, true);
         if (intersects.length > 0) {
             focusAvatar(avatar, camera, controls, renderer, scene, () => {
