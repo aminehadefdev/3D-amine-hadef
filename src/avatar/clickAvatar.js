@@ -11,13 +11,15 @@ import { stay } from './animations/stay';
 import { salsa } from './animations/salsa'
 import { moveCameraToTopView } from './moveCameraToTopView';
 import { getAgeFromDate } from './getAgeFromDate';
+import { AudioListener, Audio, AudioLoader } from "three";
+
 
 
 
 export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
     const talkAndStay = (text) => {
         talk(avatar, mixer)
-        displayTextOnDialog(text, ()=>{stay(avatar, mixer)})
+        displayTextOnDialog(text, () => { stay(avatar, mixer) })
     }
     // --- Raycaster pour le clic ---
     const raycaster = new THREE.Raycaster();
@@ -29,7 +31,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             "question": "Salut, t’es qui toi?",
             "id": "btn-question-" + uuidv4(),
             "actions": () => {
-                talkAndStay("Hey 👋 moi c’est Amine, un hacker du web (version propre hein 😅) passionné par le code, les interfaces bien faites et les défis techniques!")
+                talkAndStay("Hey 👋 moi c’est Amine, un hacker du web (version propre hein 😅) passionné par le code, les interfaces bien faites et les défis techniques! 🤓 Dyslexique de père en fils depuis 1991 📚 (S’il y a des fautes d’orthographe, n’hésitez pas à me le dire 😅) amine.hadef.dev@gmail.com")
             }
         },
         {
@@ -217,13 +219,26 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                         window.removeEventListener('click', onClick)
                         displayTextOnDialog("3 4 tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............")
                         moveCameraToTopView(avatar, camera, controls, renderer, scene, () => {
-                            salsa(avatar, mixer, () => {
-                                stay(avatar, mixer)
-                                focusAvatar(avatar, camera, controls, renderer, scene, () => {
-                                    displayTextOnDialog("Wahooooo, c’était trop cool !")
-                                    window.addEventListener('click', onClick)
+                            const listener = new AudioListener();
+                            camera.add(listener)
+                            const sound = new Audio(listener);
+                            // load a sound and set it as the Audio object's buffer
+                            const audioLoader = new AudioLoader();
+                            audioLoader.load("/audios/salsa.mp3", function (buffer) {
+                                sound.setBuffer(buffer);
+                                sound.setLoop(true);
+                                sound.setVolume(0.5);
+                                sound.play();
+                                salsa(avatar, mixer, () => {
+                                    sound.stop()
+                                    stay(avatar, mixer)
+                                    focusAvatar(avatar, camera, controls, renderer, scene, () => {
+                                        displayTextOnDialog("Wahooooo, c’était trop cool !")
+                                        window.addEventListener('click', onClick)
+                                    })
                                 })
-                            })
+                            });
+
                         })
                     });
                 })
@@ -290,7 +305,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                         talk(avatar, mixer)
                         displayTextOnDialog(text, () => {
                             stay(avatar, mixer)
-                            displayPopUpQuestions('right',() => {
+                            displayPopUpQuestions('right', () => {
                                 displayBtnsQuestions(questions, () => {
                                     addEventbtnsQuestions(questions)
                                 })
@@ -304,7 +319,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
     // --- Clic sur avatar --
     const onClick = (event) => {
         event.preventDefault()
-        
+
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
