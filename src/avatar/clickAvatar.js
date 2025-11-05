@@ -283,7 +283,14 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             }
 
 
-        }
+        },
+        {
+            "question": "Tu aimes voyager?",
+            "id": "btn-question-" + uuidv4(),
+            "actions": () => {
+                talkAndStay("Avant, non, je détestais voyager 😒. Je trouvais que ça n’avait aucun intérêt. Mais maintenant, on ne peut plus m’arrêter ! 💪✈️ En deux ans, j’ai visité : l'Espagne 🏖️🍷 le Portugal 🏰🍴 la Malaisie 🌴🏞️ le Cambodge 🛕🌅 les Pays-Bas 🚲🌷 Et maintenant, je voudrais aller en Colombie 🌄☕ en Angola 🏝️🦁 a la Nouvelle-Zélande 🏔️🛶 …et après… bref, vous avez compris 😄🌍🧳✈️.")
+            }
+        },
 
     ]
 
