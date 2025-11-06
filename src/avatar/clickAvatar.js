@@ -17,9 +17,16 @@ import { AudioListener, Audio, AudioLoader } from "three";
 
 
 export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
+    let isOcuped = false
     const talkAndStay = (text) => {
-        talk(avatar, mixer)
-        displayTextOnDialog(text, () => { stay(avatar, mixer) })
+        if (!isOcuped) {
+            isOcuped = true
+            talk(avatar, mixer)
+            displayTextOnDialog(text, () => { 
+                isOcuped = false
+                stay(avatar, mixer)
+            })
+        }
     }
     // --- Raycaster pour le clic ---
     const raycaster = new THREE.Raycaster();
@@ -73,21 +80,25 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             "question": "T’es fort en quoi exactement?",
             "id": "btn-question-" + uuidv4(),
             "actions": () => {
-                talk(avatar, mixer)
-                displayTextOnDialog("Mon terrain de jeu ? Le web, tout simplement 😎. Je manie le PHP 🐘 (avec Symfony et Laravel). Le JavaScript ⚡ (et ses acolytes React, React Native, Vue, Node, Express, jQuery). Sans oublier le HTML, le CSS, Tailwind, Bootstrap et un peu de templating façon Twing et Phtml 🎨. Côté bases de données, je parle couramment MySQL, PostgreSQL et SQL pur jus 💾.", () => {
-                    stay(avatar, mixer)
-                    let btNext = document.createElement('button');
-                    btNext.textContent = 'suivent->';
-                    dialog.appendChild(btNext);
-                    btNext.addEventListener('click', () => {
-                        window.removeEventListener('click', onClick)
-                        talk(avatar, mixer)
-                        displayTextOnDialog(" Je bricole aussi avec FastAPI 🐍. J’orchestre le tout dans Docker 🐳, je versionne avec Git et SVN. Et je garde mes serveurs bien dressés sur Linux, MacOS ou Windows 💻. Ajoute à ça du TDD, du BDD, un peu de DDD, des principes SOLID, et une touche d’Agile (Scrum & Kanban style) 🚀. Bref, full-stack de la tête aux pieds, mais avec un petit cœur ❤️ qui bat fort pour le backend !", () => {
-                            stay(avatar, mixer)
-                            window.addEventListener('click', onClick)
+                if(!isOcuped){
+                    isOcuped = true
+                    talk(avatar, mixer)
+                    displayTextOnDialog("Mon terrain de jeu ? Le web, tout simplement 😎. Je manie le PHP 🐘 (avec Symfony et Laravel). Le JavaScript ⚡ (et ses acolytes React, React Native, Vue, Node, Express, jQuery). Sans oublier le HTML, le CSS, Tailwind, Bootstrap et un peu de templating façon Twing et Phtml 🎨. Côté bases de données, je parle couramment MySQL, PostgreSQL et SQL pur jus 💾.", () => {
+                        stay(avatar, mixer)
+                        let btNext = document.createElement('button');
+                        btNext.textContent = 'suivent->';
+                        dialog.appendChild(btNext);
+                        btNext.addEventListener('click', () => {
+                            window.removeEventListener('click', onClick)
+                            talk(avatar, mixer)
+                            displayTextOnDialog(" Je bricole aussi avec FastAPI 🐍. J’orchestre le tout dans Docker 🐳, je versionne avec Git et SVN. Et je garde mes serveurs bien dressés sur Linux, MacOS ou Windows 💻. Ajoute à ça du TDD, du BDD, un peu de DDD, des principes SOLID, et une touche d’Agile (Scrum & Kanban style) 🚀. Bref, full-stack de la tête aux pieds, mais avec un petit cœur ❤️ qui bat fort pour le backend !", () => {
+                                isOcuped = false
+                                stay(avatar, mixer)
+                                window.addEventListener('click', onClick)
+                            })
                         })
                     })
-                })
+                }
             }
         },
         {
@@ -200,86 +211,93 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             'question': "Tu sais danser la salsa?",
             'id': "btn-question-" + uuidv4(),
             'actions': () => {
-                talk(avatar, mixer)
-                displayTextOnDialog("En vrai, non… mais ici je sais danser la salsa. Vous voulez une démo?", () => {
-                    stay(avatar, mixer)
-                    let yesBtn = document.createElement('button');
-                    yesBtn.textContent = 'oui';
-                    dialog.appendChild(yesBtn);
-
-                    let noBtn = document.createElement('button');
-                    noBtn.textContent = 'non';
-                    dialog.appendChild(noBtn);
-
-                    noBtn.addEventListener('click', () => {
-                        displayTextOnDialog("Une prochaine fois alors 😉.")
-                    })
-
-                    yesBtn.addEventListener('click', () => {
-                        window.removeEventListener('click', onClick)
-                        displayTextOnDialog("3 4 tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............")
-                        moveCameraToTopView(avatar, camera, controls, renderer, scene, () => {
-                            const listener = new AudioListener();
-                            camera.add(listener)
-                            const sound = new Audio(listener);
-                            // load a sound and set it as the Audio object's buffer
-                            const audioLoader = new AudioLoader();
-                            audioLoader.load("/audios/salsa.mp3", function (buffer) {
-                                sound.setBuffer(buffer);
-                                sound.setLoop(true);
-                                sound.setVolume(0.5);
-                                sound.play();
-                                salsa(avatar, mixer, () => {
-                                    sound.stop()
-                                    stay(avatar, mixer)
-                                    focusAvatar(avatar, camera, controls, renderer, scene, () => {
-                                        displayTextOnDialog("Wahooooo, c’était trop cool !")
-                                        window.addEventListener('click', onClick)
-                                    })
-                                })
-                            });
-
+                if(!isOcuped){
+                    isOcuped = true
+                    talk(avatar, mixer)
+                    displayTextOnDialog("En vrai, non… mais ici je sais danser la salsa. Vous voulez une démo?", () => {
+                        stay(avatar, mixer)
+                        let yesBtn = document.createElement('button');
+                        yesBtn.textContent = 'oui';
+                        dialog.appendChild(yesBtn);
+    
+                        let noBtn = document.createElement('button');
+                        noBtn.textContent = 'non';
+                        dialog.appendChild(noBtn);
+    
+                        noBtn.addEventListener('click', () => {
+                            displayTextOnDialog("Une prochaine fois alors 😉.")
                         })
-                    });
-                })
+    
+                        yesBtn.addEventListener('click', () => {
+                            window.removeEventListener('click', onClick)
+                            displayTextOnDialog("3 4 tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............")
+                            moveCameraToTopView(avatar, camera, controls, renderer, scene, () => {
+                                const listener = new AudioListener();
+                                camera.add(listener)
+                                const sound = new Audio(listener);
+                                // load a sound and set it as the Audio object's buffer
+                                const audioLoader = new AudioLoader();
+                                audioLoader.load("/audios/salsa.mp3", function (buffer) {
+                                    sound.setBuffer(buffer);
+                                    sound.setLoop(true);
+                                    sound.setVolume(0.5);
+                                    sound.play();
+                                    salsa(avatar, mixer, () => {
+                                        sound.stop()
+                                        stay(avatar, mixer)
+                                        focusAvatar(avatar, camera, controls, renderer, scene, () => {
+                                            isOcuped = false
+                                            displayTextOnDialog("Wahooooo, c’était trop cool !")
+                                            window.addEventListener('click', onClick)
+                                        })
+                                    })
+                                });
+    
+                            })
+                        });
+                    })
+                }
             }
         },
         {
             'question': "tu as des passions?",
             'id': "btn-question-" + uuidv4(),
             'actions': () => {
-                talk(avatar, mixer)
-                displayTextOnDialog("oui j'ai beacoup de passion a part l'informatique. je fait du skateboard, j'aime bien faire des lego aussi j'aime cuisine je fait plein de plat super bon je sais très bien faire du guacamol vous voulez ma recette?", () => {
-                    stay(avatar, mixer)
-                    let yesBtn = document.createElement('button');
-                    yesBtn.textContent = 'oui';
-                    dialog.appendChild(yesBtn);
-
-                    let noBtn = document.createElement('button');
-                    noBtn.textContent = 'non';
-                    dialog.appendChild(noBtn);
-
-                    yesBtn.addEventListener('click', () => {
-                        window.removeEventListener('click', onClick)
-                        talk(avatar, mixer)
-                        displayTextOnDialog("Alors… les ingrédients pour 4 personnes : 4 avocats (pas trop durs, sinon vous ne pourrez pas les écraser). 2 tomates bien fermes. 2 oignons rouges. 1 citron vert. 1 botte de coriandre. De la sauce Cholula ⚠️ Ne mettez surtout pas de sel, sinon les avocats vont noircir.", () => {
-                            stay(avatar, mixer)
-                            let next1 = document.createElement('button');
-                            next1.textContent = 'suivent';
-                            dialog.appendChild(next1);
-                            next1.addEventListener('click', () => {
-                                talk(avatar, mixer)
-                                window.addEventListener('click', onClick)
-                                displayTextOnDialog('Coupez les oignons et les tomates en petits dés. Pressez le jus du citron vert. Hachez la coriandre. Dans un plat suffisamment grand, épluchez et écrasez les avocats (surtout sans utiliser de mixeur). Ajoutez les oignons, les tomates et la coriandre dans le plat. Versez un peu de sauce Cholula. Mélangez bien… et c’est prêt !🥑💡', () => {
-                                    stay(avatar, mixer)
+                if(!isOcuped){
+                    isOcuped = true
+                    talk(avatar, mixer)
+                    displayTextOnDialog("oui j'ai beacoup de passion a part l'informatique. je fait du skateboard, j'aime bien faire des lego aussi j'aime cuisine je fait plein de plat super bon je sais très bien faire du guacamol vous voulez ma recette?", () => {
+                        stay(avatar, mixer)
+                        let yesBtn = document.createElement('button');
+                        yesBtn.textContent = 'oui';
+                        dialog.appendChild(yesBtn);
+    
+                        let noBtn = document.createElement('button');
+                        noBtn.textContent = 'non';
+                        dialog.appendChild(noBtn);
+    
+                        yesBtn.addEventListener('click', () => {
+                            window.removeEventListener('click', onClick)
+                            talk(avatar, mixer)
+                            displayTextOnDialog("Alors… les ingrédients pour 4 personnes : 4 avocats (pas trop durs, sinon vous ne pourrez pas les écraser). 2 tomates bien fermes. 2 oignons rouges. 1 citron vert. 1 botte de coriandre. De la sauce Cholula ⚠️ Ne mettez surtout pas de sel, sinon les avocats vont noircir.", () => {
+                                stay(avatar, mixer)
+                                let next1 = document.createElement('button');
+                                next1.textContent = 'suivent';
+                                dialog.appendChild(next1);
+                                next1.addEventListener('click', () => {
+                                    talk(avatar, mixer)
+                                    window.addEventListener('click', onClick)
+                                    displayTextOnDialog('Coupez les oignons et les tomates en petits dés. Pressez le jus du citron vert. Hachez la coriandre. Dans un plat suffisamment grand, épluchez et écrasez les avocats (surtout sans utiliser de mixeur). Ajoutez les oignons, les tomates et la coriandre dans le plat. Versez un peu de sauce Cholula. Mélangez bien… et c’est prêt !🥑💡', () => {
+                                        stay(avatar, mixer)
+                                    })
                                 })
                             })
                         })
+                        noBtn.addEventListener('click', () => {
+                            displayTextOnDialog("Une prochaine fois alors 😉.")
+                        })
                     })
-                    noBtn.addEventListener('click', () => {
-                        displayTextOnDialog("Une prochaine fois alors 😉.")
-                    })
-                })
+                }
             }
 
 
