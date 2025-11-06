@@ -22,11 +22,25 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
         if (!isOcuped) {
             isOcuped = true
             talk(avatar, mixer)
-            displayTextOnDialog(text, () => { 
+            displayTextOnDialog(text, () => {
                 isOcuped = false
                 stay(avatar, mixer)
             })
         }
+    }
+    const yesOrNo = (cbYes, cbNo) => {
+        let yesBtn = document.createElement('button');
+        yesBtn.textContent = 'oui';
+        dialog.appendChild(yesBtn);
+
+        let NoBtn = document.createElement('button');
+        NoBtn.textContent = 'No';
+        dialog.appendChild(NoBtn);
+
+        yesBtn.addEventListener('click', cbYes)
+        NoBtn.addEventListener('click', cbNo)
+
+
     }
     // --- Raycaster pour le clic ---
     const raycaster = new THREE.Raycaster();
@@ -80,7 +94,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             "question": "T’es fort en quoi exactement?",
             "id": "btn-question-" + uuidv4(),
             "actions": () => {
-                if(!isOcuped){
+                if (!isOcuped) {
                     isOcuped = true
                     talk(avatar, mixer)
                     displayTextOnDialog("Mon terrain de jeu ? Le web, tout simplement 😎. Je manie le PHP 🐘 (avec Symfony et Laravel). Le JavaScript ⚡ (et ses acolytes React, React Native, Vue, Node, Express, jQuery). Sans oublier le HTML, le CSS, Tailwind, Bootstrap et un peu de templating façon Twing et Phtml 🎨. Côté bases de données, je parle couramment MySQL, PostgreSQL et SQL pur jus 💾.", () => {
@@ -211,24 +225,12 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             'question': "Tu sais danser la salsa?",
             'id': "btn-question-" + uuidv4(),
             'actions': () => {
-                if(!isOcuped){
+                if (!isOcuped) {
                     isOcuped = true
                     talk(avatar, mixer)
                     displayTextOnDialog("En vrai, non… mais ici je sais danser la salsa. Vous voulez une démo?", () => {
                         stay(avatar, mixer)
-                        let yesBtn = document.createElement('button');
-                        yesBtn.textContent = 'oui';
-                        dialog.appendChild(yesBtn);
-    
-                        let noBtn = document.createElement('button');
-                        noBtn.textContent = 'non';
-                        dialog.appendChild(noBtn);
-    
-                        noBtn.addEventListener('click', () => {
-                            displayTextOnDialog("Une prochaine fois alors 😉.")
-                        })
-    
-                        yesBtn.addEventListener('click', () => {
+                        yesOrNo(() => {
                             window.removeEventListener('click', onClick)
                             displayTextOnDialog("3 4 tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............")
                             moveCameraToTopView(avatar, camera, controls, renderer, scene, () => {
@@ -247,15 +249,61 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                                         isOcuped = false
                                         stay(avatar, mixer)
                                         focusAvatar(avatar, camera, controls, renderer, scene, () => {
-                                            
                                             displayTextOnDialog("Wahooooo, c’était trop cool !")
                                             window.addEventListener('click', onClick)
                                         })
                                     })
                                 });
-    
+
+                            });
+                        }, () => {
+
+                            isOcuped = true
+                            displayTextOnDialog("Une prochaine fois alors 😉.", () => {
+                                isOcuped = false
                             })
-                        });
+
+                        })
+                        // let yesBtn = document.createElement('button');
+                        // yesBtn.textContent = 'oui';
+                        // dialog.appendChild(yesBtn);
+
+                        // let noBtn = document.createElement('button');
+                        // noBtn.textContent = 'non';
+                        // dialog.appendChild(noBtn);
+
+                        // noBtn.addEventListener('click', () => {
+                        //     displayTextOnDialog("Une prochaine fois alors 😉.")
+                        // })
+
+                        // yesBtn.addEventListener('click', () => {
+                        //     window.removeEventListener('click', onClick)
+                        //     displayTextOnDialog("3 4 tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............")
+                        //     moveCameraToTopView(avatar, camera, controls, renderer, scene, () => {
+                        //         const listener = new AudioListener();
+                        //         camera.add(listener)
+                        //         const sound = new Audio(listener);
+                        //         // load a sound and set it as the Audio object's buffer
+                        //         const audioLoader = new AudioLoader();
+                        //         audioLoader.load("/audios/salsa.mp3", function (buffer) {
+                        //             sound.setBuffer(buffer);
+                        //             sound.setLoop(true);
+                        //             sound.setVolume(0.5);
+                        //             sound.play();
+                        //             salsa(avatar, mixer, () => {
+                        //                 sound.stop()
+                        //                 isOcuped = false
+                        //                 stay(avatar, mixer)
+                        //                 focusAvatar(avatar, camera, controls, renderer, scene, () => {
+
+                        //                     displayTextOnDialog("Wahooooo, c’était trop cool !")
+                        //                     window.addEventListener('click', onClick)
+                        //                 })
+                        //             })
+                        //         });
+
+                        //     })
+                        // });
                     })
                 }
             }
@@ -264,7 +312,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             'question': "tu as des passions?",
             'id': "btn-question-" + uuidv4(),
             'actions': () => {
-                if(!isOcuped){
+                if (!isOcuped) {
                     isOcuped = true
                     talk(avatar, mixer)
                     displayTextOnDialog("oui j'ai beacoup de passion a part l'informatique. je fait du skateboard, j'aime bien faire des lego aussi j'aime cuisine je fait plein de plat super bon je sais très bien faire du guacamol vous voulez ma recette?", () => {
@@ -272,11 +320,11 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                         let yesBtn = document.createElement('button');
                         yesBtn.textContent = 'oui';
                         dialog.appendChild(yesBtn);
-    
+
                         let noBtn = document.createElement('button');
                         noBtn.textContent = 'non';
                         dialog.appendChild(noBtn);
-    
+
                         yesBtn.addEventListener('click', () => {
                             window.removeEventListener('click', onClick)
                             talk(avatar, mixer)
