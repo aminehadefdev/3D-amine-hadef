@@ -244,9 +244,10 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                                     sound.play();
                                     salsa(avatar, mixer, () => {
                                         sound.stop()
+                                        isOcuped = false
                                         stay(avatar, mixer)
                                         focusAvatar(avatar, camera, controls, renderer, scene, () => {
-                                            isOcuped = false
+                                            
                                             displayTextOnDialog("Wahooooo, c’était trop cool !")
                                             window.addEventListener('click', onClick)
                                         })
