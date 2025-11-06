@@ -1,4 +1,4 @@
-body{
+body {
     cursor: pointer;
     overflow: hidden;
     width: 100%;
@@ -6,6 +6,7 @@ body{
     padding: 0;
     margin: 0;
 }
+
 .popup {
     display: none;
     position: absolute;
@@ -73,4 +74,12 @@ body{
     padding: 0;
     margin-bottom: 10px;
     transform: translateY(10px);
+}
+
+@media (max-width: 600px) {
+    .popup {
+        left: initial;
+        right: 2%;
+        width: 20%;
+    }
 }
