@@ -45,28 +45,28 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
             'question': 'Tu as quel âge?',
             'id': "btn-question-" + uuidv4(),
             'actions': () => {
-                talkAndStay("J’ai " + getAgeFromDate('22/11/1991') + " ans, je suis né le 22/11/1991.\nJe trouve ma date d’anniversaire super stylée : elle est complètement en miroir 😉")
+                talkAndStay("J’ai " + getAgeFromDate('22/11/1991') + " ans, je suis né le 22/11/1991. Je trouve ma date d’anniversaire super stylée : elle est complètement en miroir 😉")
             }
         },
         {
             'question': 'Tu habite où?',
             'id': "btn-question-" + uuidv4(),
             'actions': () => {
-                talkAndStay("J'habite a Clamart dans le 92.")
+                talkAndStay("J'habite à Clamart dans le 92.")
             }
         },
         {
             "question": "Tu viens d’où?",
             "id": "btn-question-" + uuidv4(),
             "actions": () => {
-                talkAndStay("Je viens d’Algérie DZ squad, j'ai grandi en france, j’ai posé mes valises à Paris 🗼. Ici, je code, je crée, et je carbure au thé ☕ et à la musique 🎧.")
+                talkAndStay("Je viens d’Algérie DZ squad, j'ai grandi en france, j’ai posé mes valises à Clamart 🗼. Ici, je code, je crée, et je carbure au thé ☕ et à la musique 🎧.")
             }
         },
         {
             "question": "Pourquoi t’as choisi le développement?",
             "id": "btn-question-" + uuidv4(),
             "actions": () => {
-                talkAndStay("Parce que j’adore apprendre et comprendre comment tout marche ! Et aussi parce que faire planter un programme et réussir à le réparer, c’est un peu comme vaincre un boss de jeu vidéo 💪🎮. Le developpement m'offre un vrais defi il y a toujour quelque chose a apprende ou a revoir")
+                talkAndStay("Parce que j’adore apprendre et comprendre comment tout marche ! Et aussi parce que faire planter un programme et réussir à le réparer, c’est un peu comme vaincre un boss de jeu vidéo 💪🎮. Le developpement m'offre un vrais defi il y a toujours quelque chose a apprende ou a revoir")
             }
         },
         {
@@ -86,7 +86,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                     displayTextOnDialog("Mon terrain de jeu ? Le web, tout simplement 😎. Je manie le PHP 🐘 (avec Symfony et Laravel). Le JavaScript ⚡ (et ses acolytes React, React Native, Vue, Node, Express, jQuery). Sans oublier le HTML, le CSS, Tailwind, Bootstrap et un peu de templating façon Twing et Phtml 🎨. Côté bases de données, je parle couramment MySQL, PostgreSQL et SQL pur jus 💾.", () => {
                         stay(avatar, mixer)
                         let btNext = document.createElement('button');
-                        btNext.textContent = 'suivent->';
+                        btNext.textContent = 'suivant->';
                         dialog.appendChild(btNext);
                         btNext.addEventListener('click', () => {
                             window.removeEventListener('click', onClick)
@@ -282,7 +282,7 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                             displayTextOnDialog("Alors… les ingrédients pour 4 personnes : 4 avocats (pas trop durs, sinon vous ne pourrez pas les écraser). 2 tomates bien fermes. 2 oignons rouges. 1 citron vert. 1 botte de coriandre. De la sauce Cholula ⚠️ Ne mettez surtout pas de sel, sinon les avocats vont noircir.", () => {
                                 stay(avatar, mixer)
                                 let next1 = document.createElement('button');
-                                next1.textContent = 'suivent';
+                                next1.textContent = 'suivant->';
                                 dialog.appendChild(next1);
                                 next1.addEventListener('click', () => {
                                     talk(avatar, mixer)
