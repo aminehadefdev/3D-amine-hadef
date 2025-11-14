@@ -264,46 +264,6 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                             })
 
                         })
-                        // let yesBtn = document.createElement('button');
-                        // yesBtn.textContent = 'oui';
-                        // dialog.appendChild(yesBtn);
-
-                        // let noBtn = document.createElement('button');
-                        // noBtn.textContent = 'non';
-                        // dialog.appendChild(noBtn);
-
-                        // noBtn.addEventListener('click', () => {
-                        //     displayTextOnDialog("Une prochaine fois alors 😉.")
-                        // })
-
-                        // yesBtn.addEventListener('click', () => {
-                        //     window.removeEventListener('click', onClick)
-                        //     displayTextOnDialog("3 4 tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............ tcha tcha tchtchatcha ............")
-                        //     moveCameraToTopView(avatar, camera, controls, renderer, scene, () => {
-                        //         const listener = new AudioListener();
-                        //         camera.add(listener)
-                        //         const sound = new Audio(listener);
-                        //         // load a sound and set it as the Audio object's buffer
-                        //         const audioLoader = new AudioLoader();
-                        //         audioLoader.load("/audios/salsa.mp3", function (buffer) {
-                        //             sound.setBuffer(buffer);
-                        //             sound.setLoop(true);
-                        //             sound.setVolume(0.5);
-                        //             sound.play();
-                        //             salsa(avatar, mixer, () => {
-                        //                 sound.stop()
-                        //                 isOcuped = false
-                        //                 stay(avatar, mixer)
-                        //                 focusAvatar(avatar, camera, controls, renderer, scene, () => {
-
-                        //                     displayTextOnDialog("Wahooooo, c’était trop cool !")
-                        //                     window.addEventListener('click', onClick)
-                        //                 })
-                        //             })
-                        //         });
-
-                        //     })
-                        // });
                     })
                 }
             }
@@ -338,11 +298,13 @@ export function clickAvatar(avatar, camera, controls, renderer, scene, mixer) {
                                     window.addEventListener('click', onClick)
                                     displayTextOnDialog('Coupez les oignons et les tomates en petits dés. Pressez le jus du citron vert. Hachez la coriandre. Dans un plat suffisamment grand, épluchez et écrasez les avocats (surtout sans utiliser de mixeur). Ajoutez les oignons, les tomates et la coriandre dans le plat. Versez un peu de sauce Cholula. Mélangez bien… et c’est prêt !🥑💡', () => {
                                         stay(avatar, mixer)
+                                        isOcuped = false
                                     })
                                 })
                             })
                         })
                         noBtn.addEventListener('click', () => {
+                            isOcuped = false
                             displayTextOnDialog("Une prochaine fois alors 😉.")
                         })
                     })
